@@ -1,6 +1,24 @@
-function showAlert(){  
-    alert("Hello! the button is clicked,this js class")
+document.addEventListener("Counter",init);
+
+let count = Number(sessionStorage.getItem("count")) || 0;
+
+function init(){
+    document.getElementById("count").textContent = count;
 }
-function changeText(){  
-  document.getElementById('text').innerHTML = "Text Changed";
+
+function increaseCount(){
+    count++;
+    updateCount();
+}
+function decreaseCount(){
+    count--;
+    updateCount();
+}
+function resetCount(){
+    count = 0;
+    updateCount();
+}
+function updateCount(){
+    document.getElementById("count").textContent = count;
+    sessionStorage.setItem("count",count);
 }
