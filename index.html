@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter App</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="counter-container">
-        <h2>Counter App</h2>
-        <p id="count">0</p>
-        <button id="increase" onclick="increaseCount()">Increase</button>
-        <button id="decrease" onclick="decreaseCount()">Decrease</button>
-        <button id="reset" onclick="resetCount()">Reset</button>
+    <div class="container">
+        <h2>To-Do List</h2>
+        <input type="text" id="taskInput" placeholder="Enter Task Here">
+        <button id="addTask" onclick="addTask()">Add Task</button>
+        <ul id ="taskList"></ul>
+
     </div>
     <script src="script.js"></script>
 </body>

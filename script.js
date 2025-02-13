@@ -1,24 +1,43 @@
-document.addEventListener("Counter",init);
+//Todo App
 
-let count = Number(sessionStorage.getItem("count")) || 0;
+document.addEventListener("Todos",init);
 
 function init(){
-    document.getElementById("count").textContent = count;
+    loadTasks();
 }
 
-function increaseCount(){
-    count++;
-    updateCount();
+function loadTasks(){
+    const tasks = JSON.parse(localStorage.getItem("tasks"))||[];
+    tasks.forEach(task => addTaskToDom(task));
+ }
+function addTask(){
+    const taskInput = document.getElementById("taskInput");
+    const task = taskInput.value.trim();
+    if(task == "") return;
+
+    addTaskToDOM(task);
+    saveTask(task);
+    taskInput.value="";
 }
-function decreaseCount(){
-    count--;
-    updateCount();
+function addTaskToDOM(task){
+    const taskList = document.getElementById("taskList");
+    const li = document.createElement("li");
+    li.innerHTML = `${task} <button class= "remove-btn">Remove</button>`
+    taskList.appendChild(li);
+
+    li.querySelector(".remove-btn").addEventListener("click",function(){
+        removeTask(task,li);
+    })
 }
-function resetCount(){
-    count = 0;
-    updateCount();
+
+function saveTask(task){
+    const tasks = JSON.parse(localStorage.getItem("tasks"))||[];
+    tasks.push(task);
+    localStorage.setItem("tasks",JSON.stringify(tasks));
 }
-function updateCount(){
-    document.getElementById("count").textContent = count;
-    sessionStorage.setItem("count",count);
+function removeTask(task,element){
+    let tasks = JSON.parse(localStorage.getItem("tasks"));
+    tasks = tasks.filter(t => t!==task);
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+    element.remove();
 }
